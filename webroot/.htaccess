@@ -1,0 +1,20 @@
+DirectoryIndex front.php
+Options -Indexes
+
+# All requests to the front controller
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ front.php [L]
+
+php_value default_charset UTF-8
+php_value mbstring.input_encoding pass
+php_value mbstring.internal_encoding UTF-8
+php_value mbstring.output_encoding pass
+php_value mbstring.language Japanese
+php_value mbstring.substitute_character none
+
+# for Windows
+#php_value include_path '.;./internals/libs'
+# for Linux, Mac OS X
+php_value include_path '.:./internals/libs' 

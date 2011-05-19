@@ -1,0 +1,36 @@
+a.error {
+	color: red;
+}
+
+a:visited.error {
+	color: red;
+}
+
+input.error {
+	background: #FFFF80;
+}
+
+select.error {
+	background: #FFFF80;
+}
+
+span.error {
+	color: red;
+}
+
+span.required {
+	color: red;
+}
+
+textarea.error {
+	background: #FFFF80;
+}
+
+table.errors {
+	border-width: 0px;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: baseline;
+}
+
+

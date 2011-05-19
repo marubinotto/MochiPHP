@@ -1,0 +1,31 @@
+----------------------------------------------------------------------
+Qdmail 
+	Copyright (C)2008	spok
+						http://hal456.net/qdmail/
+						http://www.cpa-lab.com/tech/
+----------------------------------------------------------------------
+■ライセンス
+
+　本プログラムはフリーソフトウェアです。
+  The MIT License
+  http://www.opensource.org/licenses/mit-license.php
+
+  日本語参考訳
+  http://sourceforge.jp/projects/opensource/wiki/licenses%2FMIT_license
+
+このライセンスを守るのが難しい場合は、作者に連絡をとってください。
+
+■お願い
+
+絶対条件ではありませんが、使用してみて有用であると感じたら、Qdmailをぜひご紹介ください。そのことが作者にとって、さらにQdmailバージョンアップへの原動力となります。
+高機能日本語PHPメール送信ライブラリ　Qdmail
+http://hal456.net/qdmail/
+
+<a href="http://hal456.net/qdmail/">高機能日本語PHPメール送信ライブラリQdmail</a>
+
+<a href="http://hal456.net/qdmail/">
+Qdmail - PHP::Mail Library , Quick and Detailed for Multibyte
+</a>
+
+
+
