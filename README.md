@@ -20,10 +20,10 @@ Getting Started
 Preconditions:
 
 * mod_rewrite is enabled
-* .htaccess file is enabled and the directives in /webroot/.htaccess are allowed to be overridden
+* .htaccess file is enabled and the directives in `/webroot/.htaccess` are allowed to be overridden
    * cf. [Apache Tutorial: .htaccess files](http://httpd.apache.org/docs/2.2/howto/htaccess.html)
 
-Copy all the files under the /webroot folder to somewhere under your document root.
+Copy all the files under the `/webroot` folder to somewhere under your document root.
 
 If front.php is placed in the document root directory, bring up a web browser and go to URL:
 
@@ -33,5 +33,5 @@ If the browser displays the message as below, MochiPHP is running correctly:
 
     Hello, world!
 
-NOTE: If you use Windows, you need to modify the /webroot/.htaccess file.
+NOTE: If you use Windows, you need to modify the `/webroot/.htaccess` file.
 

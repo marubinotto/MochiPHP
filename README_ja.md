@@ -17,12 +17,12 @@ Getting Started
 まずApacheが以下の条件を満たしていることを確認します。
 
 * mod_rewrite が有効になっている事
-* .htaccess が利用でき、/webroot/.htaccess にあるディレクティブの設定が許可されている事
+* .htaccess が利用でき、`/webroot/.htaccess` にあるディレクティブの設定が許可されている事
    * 参考: [Apache チュートリアル: .htaccess ファイル](http://httpd.apache.org/docs/2.2/ja/howto/htaccess.html)
 
-/webroot 以下のファイルを、ドキュメントルート以下の好きな場所にコピーします。
+`/webroot` 以下のファイルを、ドキュメントルート以下の好きな場所にコピーします。
 
-front.php をドキュメントルート直下に配置した場合、Apacheが起動していることを確認して、
+`front.php` をドキュメントルート直下に配置した場合、Apacheが起動していることを確認して、
 以下のURLへアクセスします。
 
     http://localhost/hello
@@ -31,13 +31,13 @@ front.php をドキュメントルート直下に配置した場合、Apacheが�
 
     Hello, world!
 
-(※) Windows環境の場合は、/webroot/.htaccess を編集する必要があります。
+(※) Windows環境の場合は、`/webroot/.htaccess` を編集する必要があります。
 詳しくはファイルの中身を参照して下さい。
 
 最小構成のプログラム
 -------------------
 
-上記の例でアクセスしたページ /hello は以下の二つのファイルから構成されています。
+上記の例でアクセスしたページ`/hello`は以下の二つのファイルから構成されています。
 
 /internals/app/pages/hello.php
 
