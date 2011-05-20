@@ -31,4 +31,5 @@ front.php をドキュメントルート直下に配置した場合、Apacheが�
 
     Hello, world!
 
-
+(※) Windows環境の場合は、/webroot/.htaccess を編集する必要があります。
+詳しくはファイルの中身を参照して下さい。
