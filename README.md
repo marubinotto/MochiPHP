@@ -35,3 +35,39 @@ If the browser displays the message as below, MochiPHP is running correctly:
 
 NOTE: If you use Windows, you need to modify the `/webroot/.htaccess` file.
 
+Minimal Application
+-------------------
+
+The page `/hello` in the above example is implemented in two files:
+
+/internals/app/pages/hello.php
+
+	<?php
+	require_once('mochi/Page.class.php');
+	
+	class HelloPage extends Page
+	{
+	  public $name;
+	  
+	  function onRender(Context $context) {
+	    parent::onRender($context);
+	    
+	    $name = is_null($this->name) ? 'world' : $this->name;
+	    $this->addModel('message', "Hello, {$name}!");
+	  }
+	}
+	?>
+
+
+/internals/app/templates/hello.tpl
+
+	{$message}
+
+* The page `/hello` is composed of `HelloPage` class defined in `app/pages/hello.php` file and [Smarty](http://www.smarty.net/) template defined in `app/templates/hello.tpl` file.
+* The method `HelloPage::onRender` will be called just before rendering the template. In the above code, `addModel` method is used to define data which can be referred from the template.
+* The template `hello.tpl` defines user interface using HTML and data `{$message}` defined in `HelloPage` class.
+* Defining public properties in a page class allows to accept HTTP parameters. In the above code, the property `$name` is defined. If you access `/hello?name=marubinotto`, the browser will display `Hello, marubinotto!`.
+
+
+
+
