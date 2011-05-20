@@ -8,6 +8,7 @@ with a simple database and object-persistence library.
 * Page oriented design (write a class and template pair per a page)
 * Form components which hide complex HTML markup and user interaction handling
 * Persistent object with auto-generated property accessors
+   * You can easily follow the [Uniform Access Principle](http://martinfowler.com/bliki/UniformAccessPrinciple.html) without adding verbose getters and setters.
 
 MochiPHP can be run on PHP >= 5.3.2 if you use auto-generated property accessors 
 (because it depends on [ReflectionMethod::setAccessible](http://jp.php.net/manual/en/reflectionmethod.setaccessible.php)), 

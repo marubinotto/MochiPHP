@@ -33,3 +33,40 @@ front.php をドキュメントルート直下に配置した場合、Apacheが�
 
 (※) Windows環境の場合は、/webroot/.htaccess を編集する必要があります。
 詳しくはファイルの中身を参照して下さい。
+
+最小構成のプログラム
+-------------------
+
+上記の例でアクセスしたページ /hello は以下の二つのファイルから構成されています。
+
+/internals/app/pages/hello.php
+
+	<?php
+	require_once('mochi/Page.class.php');
+	
+	class HelloPage extends Page
+	{
+	  public $name;
+	  
+	  function onRender(Context $context) {
+	    parent::onRender($context);
+	    
+	    $name = is_null($this->name) ? 'world' : $this->name;
+	    $this->addModel('message', "Hello, {$name}!");
+	  }
+	}
+	?>
+
+
+/internals/app/templates/hello.tpl
+
+	{$message}
+	
+ポイントは以下、
+
+* `/hello`ページに対応するのは、`app/pages/hello.php`ファイルに定義された`HelloPage`クラスと、`app/templates/hello.tpl`ファイルに定義された[Smarty](http://www.smarty.net/)テンプレート。
+* `HelloPage::onRender`はPageクラスに定義済みのメソッドで、テンプレートが出力される直前に呼び出される。ここでは、`addModel`というメソッドを使って、テンプレートに渡すデータを定義している（ここでは`message`という名前のデータを定義）。
+* テンプレート（`hello.tpl`）では、`HelloPage`で定義されたデータを参照しながら、ページの見た目を定義する。
+* Pageクラスにpublicのプロパティを定義すると、HTTPパラメータを受け取ることができる。上記の例では、`$name`というプロパティが定義されている。試しに、URLを `/hello?name=marubinotto` とすると、`Hello, marubinotto!` と表示される。
+
+
