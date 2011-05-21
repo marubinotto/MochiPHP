@@ -25,7 +25,10 @@ Preconditions:
 
 Copy all the files under the `/webroot` folder to somewhere under your document root.
 
-If front.php is placed in the document root directory, bring up a web browser and go to URL:
+If you use Unix/Linux or Mac OS X, make sure the web server can write to the directory
+`internals/app/templates_c`.
+
+If `front.php` is placed in the document root directory, bring up a web browser and go to URL:
 
     http://localhost/hello
     

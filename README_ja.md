@@ -28,8 +28,10 @@ Getting Started
 
 `/webroot` 以下のファイルを、ドキュメントルート以下の好きな場所にコピーします。
 
-`front.php` をドキュメントルート直下に配置した場合、Apacheが起動していることを確認して、
-以下のURLへアクセスします。
+Linux、Mac OS Xなどの環境では、`internals/app/templates_c`
+ディレクトリがWebサーバーから読み書きできるようにパーミッションを設定して下さい。
+
+`front.php` がドキュメントルート直下にある場合、以下のURLへアクセスします。
 
     http://localhost/hello
     
