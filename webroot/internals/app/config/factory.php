@@ -2,6 +2,7 @@
 require_once('mochi/AppResources.class.php');
 require_once('mochi/db/Database.class.php');
 require_once('mochi/db/PersistentObject.class.php');
+require_once(dirname(__FILE__) . '/../models/BlogPost.class.php');
 require_once(dirname(__FILE__) . '/../models/Task.class.php');
 
 class Factory
@@ -33,7 +34,11 @@ class Factory
 	}
 	
 	function getPersistentObjectClasses() {
-		return array('Task');
+		return array('BlogPost', 'Task');
+	}
+	
+	function getBlogPostRepository() {
+		return new BlogPostRepository($this->getDatabase());
 	}
 	
 	function getTaskRepository() {
