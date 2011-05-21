@@ -20,6 +20,10 @@ class BlogPostTest extends ModelTestBase
 	function test_properties() {
 		$this->object->title = 'Hello';
 		$this->assertEquals('Hello', $this->object->title);
+		
+		$instance = new BlogPost();
+		$instance->title = 'Hello';
+		$this->assertEquals('Hello', $instance->title);
 	}
 	
 	function test_CRUD() {
