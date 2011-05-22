@@ -77,8 +77,8 @@ Getting Started
 Form処理
 --------
 
-MochiPHPでは、テキストフィールドなどのForm部品がクラスライブラリとして提供されています。
-これらのクラスを利用することによって、Formにまつわる面倒な詳細
+MochiPHPでは、テキストフィールドなどのForm部品をクラスライブラリとして提供しています。
+このライブラリを利用することによって、Formにまつわる面倒な詳細
 （複雑なHTMLやバリデーション処理など）を書かずに済みます。
 
 以下のようなTwitterっぽいアプリケーションがサンプルプログラムに含まれています（`/form`）。
@@ -109,17 +109,17 @@ Formに対して`TextArea`のような入力フィールドを追加（`addField
 onPrepareは、ページで行われる主要な処理（パラメータの設定やイベントハンドラなど）
 の前に呼び出されます。
 
-以下では、このFormについて、正しいデータとともにSubmitが行われた場合に呼び出される
-イベントハンドラの設定を行っています。以下の設定により、ページクラスの`onSubmit`という
-メソッドが呼び出されます。
+以下では、このFormがSubmitされた際に呼び出されるメソッド（イベントハンドラ）を設定しています。
+この設定ではページクラスの`onSubmit`というメソッドが呼び出されます。
 
 	$this->form->setListenerOnValidSubmission($this->listenVia('onSubmit'));
 	
-このFormをページに登録します。これによって、テンプレートからこのFormを参照できるようになります。
+`Page::addControl`メソッドを使ってこのFormをページに登録します。
+これによって、テンプレートからこのFormを参照できるようになります。
 
 	$this->addControl($this->form);
 
-テンプレート側では、以下のようにFormとその入力フィールドの配置を記述します。
+テンプレート側では、以下のようにFormと入力フィールドの配置を記述します。
 
 	{$form->startTag()|smarty:nodefaults}
 	{$form->renderErrors()|smarty:nodefaults}
@@ -156,7 +156,7 @@ Formによって送信されたパラメータを`getValue`で取得し、
 オブジェクトの永続化
 -------------------
 
-MochiPHPでオブジェクトをデータベースに保存するのはとても簡単です。
+オブジェクトをデータベースに保存するのはとても簡単です。
 以下は永続化オブジェクトの定義例です。
 
 	class BlogPost extends PersistentObject
