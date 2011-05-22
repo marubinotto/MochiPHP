@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MochiPHP" default="package" basedir=".">
+	<property file="build.properties"/>
+	
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+	<target name="package">
+		<mkdir dir="${build.package.content.dir}"/>
+    <copy todir="${build.package.content.dir}">
+      <fileset dir=".">
+      	<exclude name="${build.dir}/**"/>
+      	<exclude name=".settings/**"/>
+        <exclude name=".*"/>
+        <exclude name="build.*"/>
+        <exclude name="webroot/internals/app/templates_c/*.php"/>
+      </fileset>
+    </copy>
+    <zip 
+      zipfile="${build.dir}/${build.package.name}.zip" 
+      basedir="${build.package.dir}"/>
+	</target>
+</project>
