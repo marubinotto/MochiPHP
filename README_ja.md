@@ -83,7 +83,7 @@ MochiPHPでは、テキストフィールドなどのForm部品がクラスラ�
 
 以下のようなTwitterっぽいアプリケーションがサンプルプログラムに含まれています（`/form`）。
 
-<screen>
+![Form Example](https://github.com/marubinotto/MochiPHP/raw/master/docs/form-example.png)
 
 このアプリケーションは`/hello`と同様、以下の２つのファイルから構成されています。
 
@@ -103,7 +103,7 @@ Formに対して`TextArea`のような入力フィールドを追加（`addField
 という設定はこの項目について入力が必須であることを表しています。
 この設定により、以下のようなバリデーション処理が自動で行われます。
 
-<screen>
+![Form Validation](https://github.com/marubinotto/MochiPHP/raw/master/docs/form-validation.png)
 
 通常、Formの定義は `Page::onPrepare` というメソッドで行います。
 onPrepareは、ページで行われる主要な処理（パラメータの設定やイベントハンドラなど）
@@ -254,7 +254,4 @@ MochiPHPでオブジェクトをデータベースに保存するのはとても
 	$this->assertEquals(0, $this->repository->count());
 
 https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/tests/models/BlogPostTest.php
-
-
-
 
