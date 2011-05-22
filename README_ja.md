@@ -29,8 +29,8 @@ Getting Started
 
 `/webroot` 以下のファイルを、ドキュメントルート以下の好きな場所にコピーします。
 
-Linux、Mac OS Xなどの環境では、`internals/app/templates_c`
-ディレクトリがWebサーバーから読み書きできるようにパーミッションを設定して下さい。
+* Linux、Mac OS Xなどの環境では、`internals/app/templates_c` ディレクトリがWebサーバーから読み書きできるようにパーミッションを設定して下さい。
+* Windows環境の場合は、`/webroot/.htaccess` を編集する必要があります。詳しくはファイルの中身を参照して下さい。
 
 `front.php` がドキュメントルート直下にある場合、以下のURLへアクセスします。
 
@@ -39,9 +39,6 @@ Linux、Mac OS Xなどの環境では、`internals/app/templates_c`
 以下のようなメッセージが表示されれば準備完了です。
 
     Hello, world!
-
-(※) Windows環境の場合は、`/webroot/.htaccess` を編集する必要があります。
-詳しくはファイルの中身を参照して下さい。
 
 最小構成のプログラム
 -------------------
