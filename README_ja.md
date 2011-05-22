@@ -63,7 +63,6 @@ Getting Started
 	}
 	?>
 
-
 /internals/app/templates/hello.tpl
 
 	{$message}
@@ -74,6 +73,85 @@ Getting Started
 * `HelloPage::onRender`はPageクラスに定義済みのメソッドで、テンプレートが出力される直前に呼び出される。ここでは、`addModel`というメソッドを使って、テンプレートに渡すデータを定義している（ここでは`message`という名前のデータを定義）。
 * テンプレート（`hello.tpl`）では、`HelloPage`で定義されたデータを参照しながら、ページの見た目を定義する。
 * Pageクラスにpublicのプロパティを定義すると、HTTPパラメータを受け取ることができる。上記の例では、`$name`というプロパティが定義されている。試しに、URLを `/hello?name=marubinotto` とすると、`Hello, marubinotto!` と表示される。
+
+Form処理
+--------
+
+MochiPHPでは、テキストフィールドなどのForm部品がクラスライブラリとして提供されています。
+これらのクラスを利用することによって、Formにまつわる面倒な詳細
+（複雑なHTMLやバリデーション処理など）を書かずに済みます。
+
+以下のようなTwitterっぽいアプリケーションがサンプルプログラムに含まれています（`/form`）。
+
+<screen>
+
+このアプリケーションは`/hello`と同様、以下の２つのファイルから構成されています。
+
+* [internals/app/pages/form.php](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/pages/form.php)
+* [internals/app/templates/form.tpl](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/templates/form.tpl)
+
+以下、順を追って説明します。
+
+まずは、`Form`クラスを利用してFormの構成を定義します。
+
+	$this->form = new Form('form');
+	$this->form->addField(new TextArea('content',
+	  array("cols" => 50, "rows" => 3, "required" => true)));
+
+Formに対して`TextArea`のような入力フィールドを追加（`addField`）していきます。
+それぞれの入力フィールドの設定についてもここで行います。例えば、`"required" => true` 
+という設定はこの項目について入力が必須であることを表しています。
+この設定により、以下のようなバリデーション処理が自動で行われます。
+
+<screen>
+
+通常、Formの定義は `Page::onPrepare` というメソッドで行います。
+onPrepareは、ページで行われる主要な処理（パラメータの設定やイベントハンドラなど）
+の前に呼び出されます。
+
+以下では、このFormについて、正しいデータとともにSubmitが行われた場合に呼び出される
+イベントハンドラの設定を行っています。以下の設定により、ページクラスの`onSubmit`という
+メソッドが呼び出されます。
+
+	$this->form->setListenerOnValidSubmission($this->listenVia('onSubmit'));
+	
+このFormをページに登録します。これによって、テンプレートからこのFormを参照できるようになります。
+
+	$this->addControl($this->form);
+
+テンプレート側では、以下のようにFormとその入力フィールドの配置を記述します。
+
+	{$form->startTag()|smarty:nodefaults}
+	{$form->renderErrors()|smarty:nodefaults}
+	{$form->fields.content->render()|smarty:nodefaults}
+	<br/><input type="submit" value=" Send "/>
+	{$form->endTag()|smarty:nodefaults}
+	
+Formライブラリの機能を利用するため、テンプレートでは以下のように
+スタイルシートやJavaScriptのファイルを指定しておく必要があります。
+
+	<link type="text/css" rel="stylesheet" href="{$basePath}/assets/mochi/control.css"/>
+	<script type="text/javascript" src="{$basePath}/assets/mochi/control.js"></script>
+
+以下は、FormがSubmitされた際に呼び出されるメソッドです。
+
+	function onSubmit($source, Context $context) {
+	  // Store the sent data
+	  array_unshift($this->entries, $this->form->getValue('content'));
+	  $context->getSession()->set('entries', $this->entries);
+
+	  // Redirect After Post
+	  $this->setRedirectToSelf($context);
+	  return false;
+	}
+
+Formによって送信されたパラメータを`getValue`で取得し、
+それを配列に追加してからセッションに登録しています。
+ここは通常、データベースなどを利用したトランザクションを行う場所です。
+
+以上の処理が終わった後は、Redirect After Postパターンに従い同じページにリダイレクトさせます。
+戻り値が `false` になっているのは、リダイレクトするので、
+ここでは以降の描画処理などをスキップする、という指定です。
 
 オブジェクトの永続化
 -------------------

@@ -59,7 +59,6 @@ The page `/hello` in the above example is implemented in two files:
 	}
 	?>
 
-
 /internals/app/templates/hello.tpl
 
 	{$message}
