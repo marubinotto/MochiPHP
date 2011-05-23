@@ -11,7 +11,7 @@ class FrontController extends Object
 	private $messages;
 	
 	function __construct() {
-		$this->pageFactory = new DefaultPageFactory();
+		$this->pageFactory = new PageFactory();
 	}
 	
 	function processRequest(Context $context) {
@@ -112,13 +112,25 @@ class FrontController extends Object
 	}
 }
 
-class DefaultPageFactory extends Object
+class PageFactory extends Object
 {
 	function createPage(Context $context) {
 		$resourcePath = $context->getResourcePath();
 		$resourceName = $context->getResourceName();
-		if (StringUtils::isBlank($resourceName))
-			throw new PageNotFoundException($resourcePath);
+		
+		// TODO
+		/*
+		if (StringUtils::isBlank($resourceName)) {
+			$defaultPage = $context->getSettings()->get('system.page.default');
+			if (is_null($defaultPage)) {
+				throw new PageNotFoundException($resourcePath);
+			}
+			else {
+				$resourceName = $defaultPage;
+				$resourcePath .= $resourceName;
+			}
+		}
+		*/
 		
 		$className = self::resourceNameToClassName($resourceName);
 		$classFile = $resourcePath . '.php';

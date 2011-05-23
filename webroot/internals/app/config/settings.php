@@ -1,5 +1,7 @@
 <?php
 return array(
+	'system.page.default' => 'hello',
+
 	'database.driver' => 'mysqlt',
 	'database.host' => 'localhost',
 	'database.user' => 'root',

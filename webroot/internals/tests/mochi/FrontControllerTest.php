@@ -2,7 +2,7 @@
 require_once('PHPUnit/Framework.php');
 require_once('mochi/FrontController.class.php');
 
-class FrontControllerTest extends PHPUnit_Framework_TestCase
+class FrontControllerStaticTest extends PHPUnit_Framework_TestCase
 {
 	function test_absolutePathToRedirectLocation() {
 		$this->assertEquals(
@@ -29,17 +29,15 @@ class FrontControllerTest extends PHPUnit_Framework_TestCase
 	}
 }
 
-class DefaultPageFactoryStaticTest extends PHPUnit_Framework_TestCase
+class PageFactoryStaticTest extends PHPUnit_Framework_TestCase
 {
 	// resourceNameToClassName
 	
 	function test_resourceNameToClassName() {
 		$this->assertEquals(
-			"LoginPage", 
-			DefaultPageFactory::resourceNameToClassName("login"));
+			"LoginPage", PageFactory::resourceNameToClassName("login"));
 		$this->assertEquals(
-			"EditCustomerPage", 
-			DefaultPageFactory::resourceNameToClassName("edit-customer"));
+			"EditCustomerPage", PageFactory::resourceNameToClassName("edit-customer"));
 	}
 }
 ?>

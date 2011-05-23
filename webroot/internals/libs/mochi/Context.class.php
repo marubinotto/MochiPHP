@@ -56,6 +56,10 @@ class Context extends Object
 		return $this->appResources;
 	}
 	
+	function getSettings() {
+		return $this->appResources->getSettings();
+	}
+	
 	function getServerVar($name) {
 		if (!isset($this->serverVars[$name])) return NULL;
 		return $this->serverVars[$name];
