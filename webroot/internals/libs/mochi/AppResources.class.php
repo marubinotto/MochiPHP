@@ -1,6 +1,7 @@
 <?php
 require_once('utils/Object.class.php');
 require_once('utils/StringUtils.class.php');
+require_once('utils/ArrayUtils.class.php');
 
 /**
  * AppResources defines the application directory structure and 
@@ -88,6 +89,14 @@ class AppResources extends Object
 	
 	function loadSettings() {
 		return $this->loadConfig(self::SETTINGS_FILE);
+	}
+	
+	private $settingsObject;
+	
+	function getSettingsObject() {
+		if (is_null($this->settingsObject))
+			$this->settingsObject = new ArrayWrapper($this->loadSettings());
+		return $this->settingsObject;
 	}
 	
 	function loadMessages() {
