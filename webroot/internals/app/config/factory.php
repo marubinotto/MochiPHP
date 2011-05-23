@@ -10,9 +10,9 @@ class Factory
 	private $appResources;
 	private $settings;
 	
-	function __construct($appResources) {
+	function __construct(AppResources $appResources) {
 		$this->appResources = $appResources;
-		$this->settings = require('settings.php');
+		$this->settings = $this->appResources->loadSettings();
 	}
 	
 	function getSettings() { 

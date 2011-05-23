@@ -96,6 +96,11 @@ class AppResourcesTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(0, $factory->getPersonRepository()->size());
 	}
 	
+	function test_loadSettings() {
+		$settings = $this->object->loadSettings();
+		$this->assertEquals("home", $settings["system.page.default"]);
+	}
+	
 	function test_loadMessages() {
 		$messages = $this->object->loadMessages();
 		$this->assertEquals("hello", $messages["message"]);

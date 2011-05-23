@@ -17,6 +17,7 @@ class AppResources extends Object
 	const PAGE_ERROR_FILE = 'error.php';
 	
 	const CONFIG_DIR = 'config';
+	const SETTINGS_FILE = 'settings.php';
 	const MESSAGES_FILE = 'messages.php';
 	const FACTORY_FILE = 'factory.php';
 	const FACTORY_CLASS_NAME = 'Factory';
@@ -83,6 +84,10 @@ class AppResources extends Object
 	
 	function loadConfig($filePath) {
 		return require(self::joinPath($this->getConfigDirPath(), $filePath));
+	}
+	
+	function loadSettings() {
+		return $this->loadConfig(self::SETTINGS_FILE);
 	}
 	
 	function loadMessages() {
