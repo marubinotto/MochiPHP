@@ -68,6 +68,78 @@ The page `/hello` in the above example is implemented in two files:
 * The template `hello.tpl` defines user interface using HTML and data `{$message}` defined in `HelloPage` class.
 * Defining public properties in a page class allows to accept HTTP parameters. In the above code, the property `$name` is defined. If you access `/hello?name=marubinotto`, the browser will display `Hello, marubinotto!`.
 
+Form Handling
+-------------
+
+The main part of MochiPHP is the class library which encapsulates HTML form and input fields
+as reusable and extensible components. It allows you to concentrate on the most important task 
+of user interface (layout, style, etc) without writing complex HTML markup and validation logic.
+
+MochiPHP comes with a sample application (`/form`) which demonstrates form handling as below:
+
+![Form Example](https://github.com/marubinotto/MochiPHP/raw/master/docs/form-example.png)
+
+This application is composed of the two files as the `/hello` example:
+
+* [internals/app/pages/form.php](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/pages/form.php)
+* [internals/app/templates/form.tpl](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/templates/form.tpl)
+
+The following is the step-by-step illustration of the above code.
+
+First of all, you need to define form structure building `Form` object:
+
+	$this->form = new Form('form');
+	$this->form->addField(new TextArea('content',
+	  array("cols" => 50, "rows" => 3, "required" => true)));
+
+Create a form object and add input fields via `addField` method as above. 
+You can customize the behavior or other attributes of a field via its constructor or methods. 
+For example, the setting `"required" => true` enables input validation as below:
+
+![Form Validation](https://github.com/marubinotto/MochiPHP/raw/master/docs/form-validation.png)
+
+You can set an event handler to a form which is called when the form is submitted:
+
+	$this->form->setListenerOnValidSubmission($this->listenVia('onSubmit'));
+
+In this case, `onSubmit` method of the page (`FormPage`) is registered as an event handler.
+
+Then, you need to register the form object to the page using `Page::addControl` 
+to allow the page template to access it:
+
+	$this->addControl($this->form);
+
+In the template `form.tpl`, you define the layout of the form:
+
+	{$form->startTag()|smarty:nodefaults}
+	{$form->renderErrors()|smarty:nodefaults}
+	{$form->fields.content->render()|smarty:nodefaults}
+	<br/><input type="submit" value=" Send "/>
+	{$form->endTag()|smarty:nodefaults}
+
+You need to include stylesheet and JavaScript references 
+in order to use the functionalities of the library:
+
+	<link type="text/css" rel="stylesheet" href="{$basePath}/assets/mochi/control.css"/>
+	<script type="text/javascript" src="{$basePath}/assets/mochi/control.js"></script>
+
+And the event handler, `onSubmit` method:
+
+	function onSubmit($source, Context $context) {
+	  // Store the sent data
+	  array_unshift($this->entries, $this->form->getValue('content'));
+	  $context->getSession()->set('entries', $this->entries);
+
+	  // Redirect After Post
+	  $this->setRedirectToSelf($context);
+	  return false;
+	}
+
+`onSubmit` method get the submitted value via `getValue` method on the form,
+and store it to the session. After that, redirect to the same page
+following the [Redirect After Post pattern](http://en.wikipedia.org/wiki/Post/Redirect/Get).
+The return value `false` means no other event handlers are invoked in this request.
+
 Object Persistence
 ------------------
 
