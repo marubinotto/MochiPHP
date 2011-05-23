@@ -87,16 +87,14 @@ class AppResources extends Object
 		return require(self::joinPath($this->getConfigDirPath(), $filePath));
 	}
 	
-	function loadSettings() {
-		return $this->loadConfig(self::SETTINGS_FILE);
-	}
+	private $settings;
 	
-	private $settingsObject;
-	
-	function getSettingsObject() {
-		if (is_null($this->settingsObject))
-			$this->settingsObject = new ArrayWrapper($this->loadSettings());
-		return $this->settingsObject;
+	function getSettings() {
+		if (is_null($this->settings)) {
+			$array = $this->loadConfig(self::SETTINGS_FILE);
+			$this->settings = new ArrayWrapper($array);
+		}
+		return $this->settings;
 	}
 	
 	function loadMessages() {

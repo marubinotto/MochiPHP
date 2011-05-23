@@ -12,7 +12,7 @@ class Factory
 	
 	function __construct(AppResources $appResources) {
 		$this->appResources = $appResources;
-		$this->settings = $this->appResources->loadSettings();
+		$this->settings = $this->appResources->getSettings();
 	}
 	
 	function getSettings() { 
@@ -24,11 +24,11 @@ class Factory
 	function getDatabase() {
 		if (is_null($this->database)) {
 			$this->database = new Database(
-				$this->settings['database.driver'], 
-				$this->settings['database.host'], 
-				$this->settings['database.user'], 
-				$this->settings['database.password'], 
-				$this->settings['database.database']);
+				$this->settings->get('database.driver'), 
+				$this->settings->get('database.host'), 
+				$this->settings->get('database.user'), 
+				$this->settings->get('database.password'), 
+				$this->settings->get('database.database'));
 		}
 		return $this->database;
 	}
