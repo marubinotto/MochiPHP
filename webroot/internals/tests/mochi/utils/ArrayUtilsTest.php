@@ -49,4 +49,26 @@ class ArrayUtilsTest extends PHPUnit_Framework_TestCase
 			ArrayUtils::toString(array("key" => array("value1", "value2"))));
 	}
 }
+
+class ArrayWrapperTest extends PHPUnit_Framework_TestCase
+{
+	private $object;
+	
+	function setUp() {
+		$this->object = new ArrayWrapper(array("key" => "value"));
+	}
+	
+	function test_toString() {
+		$this->assertEquals("{key => 'value'}", $this->object->__toString());
+	}
+	
+	function test_size() {
+		$this->assertEquals(1, $this->object->size());
+	}
+	
+	function test_get() {
+		$this->assertEquals("value", $this->object->get("key"));
+		$this->assertNull($this->object->get("no-such-key"));
+	}
+}
 ?>

@@ -44,4 +44,26 @@ class ArrayUtils
 		return $string;
 	}
 }
+
+class ArrayWrapper 
+{
+	private $array;
+	
+	function __construct(array $array) {
+		$this->array = $array;
+	}
+	
+	public function __toString() {
+		return ArrayUtils::toString($this->array);
+	}
+	
+	function size() {
+		return count($this->array);
+	}
+	
+	function get($key) {
+		if (!isset($this->array[$key])) return NULL;
+		return $this->array[$key];
+	}
+}
 ?>
