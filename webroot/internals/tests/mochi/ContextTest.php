@@ -46,41 +46,26 @@ class ContextTest extends PHPUnit_Framework_TestCase
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test"));		// without a slash
-		$this->assertNotNull($object->getResourcePath());
-		$this->assertEquals("/", $object->getResourcePath());
+		$this->assertEquals("/", $object->getResourcePath()->getPath());
 		
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/"));	// with a slash
-		$this->assertNotNull($object->getResourcePath());
-		$this->assertEquals("/", $object->getResourcePath());
+		$this->assertEquals("/", $object->getResourcePath()->getPath());
 	}
 	
 	function test_resourcePath() {
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/resource-path"));
-		$this->assertEquals("/resource-path", $object->getResourcePath());
+		$this->assertEquals("/resource-path", $object->getResourcePath()->getPath());
 	}
 		
 	function test_resourcePathWithQuery() {
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/resource-path?name=value"));
-		$this->assertEquals("/resource-path", $object->getResourcePath());
-	}
-	
-	// getResourceNameFromPath
-	
-	function test_getResourceNameFromPath() {
-		$this->assertEquals(
-			"login", 
-			Context::getResourceNameFromPath("/login"));
-		$this->assertEquals(
-			"edit-customer", 
-			Context::getResourceNameFromPath("/path/to/edit-customer"));
-		$this->assertEquals("", Context::getResourceNameFromPath("/"));
-		$this->assertEquals("", Context::getResourceNameFromPath("/path/to/"));
+		$this->assertEquals("/resource-path", $object->getResourcePath()->getPath());
 	}
 	
 	// getAppRoot
@@ -88,6 +73,57 @@ class ContextTest extends PHPUnit_Framework_TestCase
 	function test_getAppRoot() {
 		$object = new Context(array(), array(), "/path/to/app");
 		$this->assertEquals("/path/to/app", $object->getAppRoot());
+	}
+}
+
+class ResourcePathTest extends PHPUnit_Framework_TestCase
+{
+	function test_getPath() {
+		$path = new ResourcePath("/path/to/resource");
+		$this->assertEquals("/path/to/resource", $path->getPath());
+		$this->assertEquals("/path/to/resource", $path->__toString());
+	}
+	
+	function test_getNameAndDirectoryPath() {
+		$path = new ResourcePath("/resource");
+		$this->assertEquals("resource", $path->getName());
+		$this->assertEquals("/", $path->getDirectoryPath());
+		
+		$path = new ResourcePath("/path/to/resource");
+		$this->assertEquals("resource", $path->getName());
+		$this->assertEquals("/path/to/", $path->getDirectoryPath());
+		
+		$path = new ResourcePath("/");
+		$this->assertEquals("", $path->getName());
+		$this->assertEquals("/", $path->getDirectoryPath());
+		
+		$path = new ResourcePath("/path/to/");
+		$this->assertEquals("", $path->getName());
+		$this->assertEquals("/path/to/", $path->getDirectoryPath());
+	}
+	
+	function test_isDirectory() {
+		$path = new ResourcePath("/");
+		$this->assertTrue($path->isDirectory());
+		
+		$path = new ResourcePath("/path/to/");
+		$this->assertTrue($path->isDirectory());
+		
+		$path = new ResourcePath("/resource");
+		$this->assertFalse($path->isDirectory());
+	}
+	
+	function test_withAnotherName() {
+		$path = new ResourcePath("/");
+		$this->assertEquals("/foo", $path->withAnotherName("foo")->getPath());
+		
+		$path = new ResourcePath("/path/to/resource");
+		$this->assertEquals("/path/to/foo", $path->withAnotherName("foo")->getPath());
+	}
+	
+	function test_concat() {
+		$path = new ResourcePath("/path/to/resource");
+		$this->assertEquals("/path/to/resource.txt", $path . ".txt");
 	}
 }
 ?>

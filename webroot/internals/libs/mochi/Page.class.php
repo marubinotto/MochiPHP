@@ -60,7 +60,7 @@ abstract class Page extends Object
 	}
 	
 	function setRedirectToSelf($context) {
-		$this->setRedirect($context->getResourcePath());
+		$this->setRedirect($context->getResourcePath()->getPath());
 	}
 	
 	function getRedirect() {
@@ -99,7 +99,6 @@ abstract class Page extends Object
 		
 		$this->addModel('basePath', $context->getBasePath());
 		$this->addModel('resourcePath', $context->getResourcePath());
-		$this->addModel('resourceName', $context->getResourceName());
 		
 		// for debug
 		/*

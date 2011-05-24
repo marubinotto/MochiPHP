@@ -29,15 +29,53 @@ class FrontControllerStaticTest extends PHPUnit_Framework_TestCase
 	}
 }
 
-class PageFactoryStaticTest extends PHPUnit_Framework_TestCase
+class PageResolverTest extends PHPUnit_Framework_TestCase
 {
-	// resourceNameToClassName
+	private $object;
 	
-	function test_resourceNameToClassName() {
-		$this->assertEquals(
-			"LoginPage", PageFactory::resourceNameToClassName("login"));
-		$this->assertEquals(
-			"EditCustomerPage", PageFactory::resourceNameToClassName("edit-customer"));
+	function setUp() {
+		$this->object = new PageResolver();
+	}
+	
+	function test_getPageInfo() {
+		$pageInfo = $this->object->getPageInfo(new MockContext("/path/to/resource"));
+		$this->assertEquals("/path/to/resource.php", $pageInfo->filePath);
+		$this->assertEquals("ResourcePage", $pageInfo->className);
+		$this->assertEquals("path/to/resource", $pageInfo->templateName);
+	}
+	
+	function test_twoWordsResource() {
+		$pageInfo = $this->object->getPageInfo(new MockContext("/path/to/foo-bar"));
+		$this->assertEquals("/path/to/foo-bar.php", $pageInfo->filePath);
+		$this->assertEquals("FooBarPage", $pageInfo->className);
+		$this->assertEquals("path/to/foo-bar", $pageInfo->templateName);
+	}
+	
+	function test_returnDefaultIfPathIsDirectory() {
+		$pageInfo = $this->object->getPageInfo(
+			new MockContext("/path/to/", array("system.page.default" => "index")));
+		$this->assertEquals("/path/to/index.php", $pageInfo->filePath);
+		$this->assertEquals("IndexPage", $pageInfo->className);
+		$this->assertEquals("path/to/index", $pageInfo->templateName);
+	}
+}
+
+class MockContext extends Context
+{
+	private $resourcePath;
+	private $settings;
+	
+	function __construct($resourcePath, array $settings = array()) {
+		$this->resourcePath = new ResourcePath($resourcePath);
+		$this->settings = new ArrayWrapper($settings);
+	}
+	
+	function getResourcePath() {
+		return $this->resourcePath;
+	}
+	
+	function getSettings() {
+		return $this->settings;
 	}
 }
 ?>

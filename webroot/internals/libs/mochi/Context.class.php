@@ -52,6 +52,10 @@ class Context extends Object
 		$this->session = $session;
 	}
 	
+	function getAppRoot() {
+		return $this->appRoot;
+	}
+	
 	function getAppResources() {
 		return $this->appResources;
 	}
@@ -105,25 +109,46 @@ class Context extends Object
 		if (is_null($basePath)) return NULL;
 		
 		$resourcePath = str_replace($basePath, '', $requestUri);
-		return StringUtils::isBlank($resourcePath) ? '/' : $resourcePath;
+		$resourcePath = StringUtils::isBlank($resourcePath) ? '/' : $resourcePath;
+		return new ResourcePath($resourcePath);
+	}
+}
+
+class ResourcePath
+{
+	const PATH_SEPARATOR = '/';
+	private $path;
+	
+	function __construct($path) {
+		$this->path = $path;
 	}
 	
-	/**
-	 * /base/path/to/resource => resource
-	 */
-	function getResourceName() {
-		return self::getResourceNameFromPath($this->getResourcePath());
+	function getPath() {
+		return $this->path;
 	}
 	
-	static function getResourceNameFromPath($resourcePath) {
-		$pageName = $resourcePath;
-		$lastSlash = strrpos($pageName, '/');
-		if ($lastSlash === FALSE) return $pageName;
-		return substr($pageName, $lastSlash + 1);
+	function getName() {
+		$lastSlash = strrpos($this->path, self::PATH_SEPARATOR);
+		if ($lastSlash === FALSE) return $this->path;
+		return substr($this->path, $lastSlash + 1);
 	}
 	
-	function getAppRoot() {
-		return $this->appRoot;
+	function getDirectoryPath() {
+		$lastSlash = strrpos($this->path, self::PATH_SEPARATOR);
+		if ($lastSlash === FALSE) return NULL;
+		return substr($this->path, 0, $lastSlash + 1);
+	}
+	
+	function isDirectory() {
+		return StringUtils::isBlank($this->getName());
+	}
+	
+	function withAnotherName($name) {
+		return new ResourcePath($this->getDirectoryPath() . $name);
+	}
+	
+	function __toString() {
+		return $this->getPath();
 	}
 }
 ?>

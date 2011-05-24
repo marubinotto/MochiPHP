@@ -7,11 +7,11 @@ require_once('Control.class.php');
 
 class FrontController extends Object
 {
-	public $pageFactory;
+	public $pageResolver;
 	private $messages;
 	
 	function __construct() {
-		$this->pageFactory = new PageFactory();
+		$this->pageResolver = new PageResolver();
 	}
 	
 	function processRequest(Context $context) {
@@ -23,7 +23,7 @@ class FrontController extends Object
 				$context->getAppResources()->loadMessages());
 		
 			// create and render a page
-			$page = $this->pageFactory->createPage($context);
+			$page = $this->pageResolver->getPageInfo($context)->create($context);
 			$this->initPage($page, $context);
 			self::renderPage($page, $context);
 			
@@ -68,8 +68,6 @@ class FrontController extends Object
 	private static function renderPage($page, Context $context) {
 		$permitted = $page->onPermissionCheck($context);
 		if ($permitted) {
-	    	$page->setTemplateName(
-	    		StringUtils::removeStart($context->getResourcePath(), '/'));
 	    	$page->onPrepare($context);
 	    	$continue = $page->processRequest($context);
 	    	if ($continue) $page->render($context);
@@ -112,31 +110,43 @@ class FrontController extends Object
 	}
 }
 
-class PageFactory extends Object
+class PageInfo extends Object
 {
-	function createPage(Context $context) {
-		$resourcePath = $context->getResourcePath();
-		$resourceName = $context->getResourceName();
-		
-		// TODO
-		/*
-		if (StringUtils::isBlank($resourceName)) {
-			$defaultPage = $context->getSettings()->get('system.page.default');
-			if (is_null($defaultPage)) {
-				throw new PageNotFoundException($resourcePath);
-			}
-			else {
-				$resourceName = $defaultPage;
-				$resourcePath .= $resourceName;
-			}
-		}
-		*/
-		
-		$className = self::resourceNameToClassName($resourceName);
-		$classFile = $resourcePath . '.php';
-		$page = $context->getAppResources()->createPageObject($className, $classFile);
-		if (is_null($page)) throw new PageNotFoundException($resourcePath);
+	public $filePath;
+	public $className;
+	public $templateName;
+	
+	function __construct($filePath, $className, $templateName) {
+		$this->filePath = $filePath;
+		$this->className = $className;
+		$this->templateName = $templateName;
+	}
+	
+	function create(Context $context) {
+		$page = $context->getAppResources()->createPageObject($this->className, $this->filePath);
+		if (is_null($page)) throw new PageNotFoundException($context->getResourcePath()->getPath());
+		$page->setTemplateName($this->templateName);
 		return $page;
+	}
+}
+
+class PageResolver extends Object
+{
+	function getPageInfo(Context $context) {
+		$resourcePath = $context->getResourcePath();
+		
+		if ($resourcePath->isDirectory()) {
+			$defaultPage = $context->getSettings()->get('system.page.default');
+			if (is_null($defaultPage))
+				throw new PageNotFoundException($resourcePath->getPath());
+			else
+				$resourcePath = $resourcePath->withAnotherName($defaultPage);
+		}
+		
+		$filePath = $resourcePath->getPath() . '.php';
+		$className = self::resourceNameToClassName($resourcePath->getName());
+		$templateName = StringUtils::removeStart($resourcePath->getPath(), '/');
+		return new PageInfo($filePath, $className, $templateName);
 	}
 	
 	// edit-customer => EditCustomerPage
