@@ -59,23 +59,4 @@ class PageResolverTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals("path/to/index", $pageInfo->templateName);
 	}
 }
-
-class MockContext extends Context
-{
-	private $resourcePath;
-	private $settings;
-	
-	function __construct($resourcePath, array $settings = array()) {
-		$this->resourcePath = new ResourcePath($resourcePath);
-		$this->settings = new ArrayWrapper($settings);
-	}
-	
-	function getResourcePath() {
-		return $this->resourcePath;
-	}
-	
-	function getSettings() {
-		return $this->settings;
-	}
-}
 ?>

@@ -178,4 +178,19 @@ class MockField extends Field
 		$this->validated = TRUE;
 	}
 }
+
+class StatefulFormTest extends PHPUnit_Framework_TestCase
+{
+	private $object;
+	
+	function setUp() {
+		$this->object = new Form("form-name");
+		$this->object->setStateful(TRUE);
+	}
+	
+	function test_sessionStateKey() {
+		$key = $this->object->getSessionStateKey(new MockContext("/path/to/page"));
+		$this->assertEquals("state:/path/to/page#form-name", $key);
+	}
+}
 ?>
