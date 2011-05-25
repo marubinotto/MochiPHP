@@ -4,15 +4,11 @@ require_once('mochi/utils/ArrayUtils.class.php');
 
 class ArrayUtilsTest extends PHPUnit_Framework_TestCase
 {
-	// isIndexed
-	
 	function test_isIndexed() {
 		$this->assertTrue(ArrayUtils::isIndexed(array("foo", "bar")));
 		$this->assertFalse(ArrayUtils::isIndexed(array("key" => "value")));
 	}
-	
-	// indexedArrayToString
-	
+
 	function test_indexedArrayToString() {
 		$this->assertEquals(
 			"{'hogehoge', 4649}", 
@@ -24,17 +20,13 @@ class ArrayUtilsTest extends PHPUnit_Framework_TestCase
 			"{'foo', {'bar', 'baz'}}", 
 			ArrayUtils::indexedArrayToString(array("foo", array("bar", "baz"))));
 	}
-	
-	// associativeArrayToString
-	
+
 	function test_associativeArrayToString() {
 		$this->assertEquals(
 			"{key => 'value'}", 
 			ArrayUtils::associativeArrayToString(array("key" => "value")));
 	}
-	
-	// toString
-	
+
 	function test_toString() {
 		$this->assertEquals(
 			"{'hogehoge', 4649}", ArrayUtils::toString(array("hogehoge", 4649)));
