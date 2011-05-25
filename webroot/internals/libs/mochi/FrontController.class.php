@@ -124,7 +124,7 @@ class PageInfo extends Object
 	
 	function create(Context $context) {
 		$page = $context->getAppResources()->createPageObject($this->className, $this->filePath);
-		if (is_null($page)) throw new PageNotFoundException($context->getResourcePath()->getPath());
+		if (is_null($page)) throw new PageNotFoundException($context->getResourcePath());
 		$page->setTemplateName($this->templateName);
 		return $page;
 	}
@@ -133,19 +133,19 @@ class PageInfo extends Object
 class PageResolver extends Object
 {
 	function getPageInfo(Context $context) {
-		$resourcePath = $context->getResourcePath();
+		$pathObject = $context->getResourcePathObject();
 		
-		if ($resourcePath->isDirectory()) {
+		if ($pathObject->isDirectory()) {
 			$defaultPage = $context->getSettings()->get('system.page.default');
 			if (is_null($defaultPage))
-				throw new PageNotFoundException($resourcePath->getPath());
+				throw new PageNotFoundException($pathObject->getPath());
 			else
-				$resourcePath = $resourcePath->withAnotherName($defaultPage);
+				$pathObject = $pathObject->withAnotherName($defaultPage);
 		}
 		
-		$filePath = $resourcePath->getPath() . '.php';
-		$className = self::resourceNameToClassName($resourcePath->getName());
-		$templateName = StringUtils::removeStart($resourcePath->getPath(), '/');
+		$filePath = $pathObject->getPath() . '.php';
+		$className = self::resourceNameToClassName($pathObject->getName());
+		$templateName = StringUtils::removeStart($pathObject->getPath(), '/');
 		return new PageInfo($filePath, $className, $templateName);
 	}
 	

@@ -102,6 +102,11 @@ class Context extends Object
 	 * /base/path/to/resource => /path/to/resource
 	 */
 	function getResourcePath() {
+		$pathObject = $this->getResourcePathObject();
+		return is_null($pathObject) ? NULL : $pathObject->getPath();
+	}
+	
+	function getResourcePathObject() {
 		$requestUri = $this->getRequestUriWithoutQuery();
 		if (StringUtils::isBlank($requestUri)) return NULL;
 		
@@ -154,16 +159,16 @@ class ResourcePath
 
 class MockContext extends Context
 {
-	private $resourcePath;
+	private $resourcePathObject;
 	private $settings;
 	
 	function __construct($resourcePath, array $settings = array()) {
-		$this->resourcePath = new ResourcePath($resourcePath);
+		$this->resourcePathObject = new ResourcePath($resourcePath);
 		$this->settings = new ArrayWrapper($settings);
 	}
 	
-	function getResourcePath() {
-		return $this->resourcePath;
+	function getResourcePathObject() {
+		return $this->resourcePathObject;
 	}
 	
 	function getSettings() {

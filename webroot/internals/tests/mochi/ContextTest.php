@@ -30,26 +30,26 @@ class ContextTest extends PHPUnit_Framework_TestCase
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test"));		// without a slash
-		$this->assertEquals("/", $object->getResourcePath()->getPath());
+		$this->assertEquals("/", $object->getResourcePath());
 		
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/"));	// with a slash
-		$this->assertEquals("/", $object->getResourcePath()->getPath());
+		$this->assertEquals("/", $object->getResourcePath());
 	}
 	
 	function test_resourcePath() {
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/resource-path"));
-		$this->assertEquals("/resource-path", $object->getResourcePath()->getPath());
+		$this->assertEquals("/resource-path", $object->getResourcePath());
 	}
 		
 	function test_resourcePathWithQuery() {
 		$object = new Context(array(), array(
 			"SCRIPT_NAME" => "/test/front.php", 
 			"REDIRECT_URL" => "/test/resource-path?name=value"));
-		$this->assertEquals("/resource-path", $object->getResourcePath()->getPath());
+		$this->assertEquals("/resource-path", $object->getResourcePath());
 	}
 
 	function test_getAppRoot() {

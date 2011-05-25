@@ -4,6 +4,7 @@ require_once('utils/StringUtils.class.php');
 require_once('utils/ArrayUtils.class.php');
 require_once('utils/SmartyUtils.class.php');
 require_once('utils/Messages.class.php');
+require_once('Context.class.php');
 require_once('EventListener.class.php');
 
 abstract class Page extends Object
@@ -59,8 +60,8 @@ abstract class Page extends Object
 		$this->redirect = $resourcePath;
 	}
 	
-	function setRedirectToSelf($context) {
-		$this->setRedirect($context->getResourcePath()->getPath());
+	function setRedirectToSelf(Context $context) {
+		$this->setRedirect($context->getResourcePath());
 	}
 	
 	function getRedirect() {
@@ -99,16 +100,6 @@ abstract class Page extends Object
 		
 		$this->addModel('basePath', $context->getBasePath());
 		$this->addModel('resourcePath', $context->getResourcePath());
-		
-		// for debug
-		/*
-		$this->addModel('modelNames', 	// put this the first to exclude the debug info below
-			ArrayUtils::indexedArrayToString(array_keys($this->getModel())));
-		$this->addModel('parameters', 
-			ArrayUtils::toString($context->getParameters()));
-		$this->addModel('sessionAttrNames', 
-			ArrayUtils::indexedArrayToString($context->getSession()->getAttributeNames()));
-		*/
 			
 		$this->model->setTemplateDir($context->getAppResources()->getTemplateDirPath());
 		$this->model->setTemplateName($this->templateName);
