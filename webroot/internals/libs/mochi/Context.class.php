@@ -6,6 +6,7 @@ require_once('Session.class.php');
 
 class Context extends Object
 {
+	const MOCHI_VERSION = "@VERSION@";
 	const FRONT_SCRIPT_NAME = "front.php";
 	
 	private $parameters;

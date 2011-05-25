@@ -17,6 +17,10 @@
         <exclude name="webroot/internals/app/templates_c/*.php"/>
       </fileset>
     </copy>
+    <replace dir="${build.package.content.dir}" value="${project.version}">
+    	<include name="webroot/internals/libs/mochi/Context.class.php"/>
+      <replacetoken>@VERSION@</replacetoken>
+    </replace>
     <zip 
       zipfile="${build.dir}/${build.package.name}.zip" 
       basedir="${build.package.dir}"/>

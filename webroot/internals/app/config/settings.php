@@ -1,6 +1,6 @@
 <?php
 return array(
-	'system.page.default' => 'hello',
+	'system.page.default' => 'index',
 
 	'database.driver' => 'mysqlt',
 	'database.host' => 'localhost',
