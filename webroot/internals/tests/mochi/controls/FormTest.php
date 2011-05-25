@@ -40,9 +40,7 @@ class FormTest extends PHPUnit_Framework_TestCase
 		
 		// $this->assertEquals("", $this->object->renderErrors());
 	}
-	
-	// dispatchEvent
-	
+
 	function test_dispatchEvent() {
 		$context = new Context(array("_formName" => "form-name"));
 		$listener = new MockEventListener();
