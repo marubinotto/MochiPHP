@@ -7,6 +7,7 @@ class IndexPage extends Page
 		parent::onRender($context);
 		
 		$this->addModel('version', Context::MOCHI_VERSION);
+		$this->addModel('phpVersion', PHP_VERSION);
 	}
 }
 ?>

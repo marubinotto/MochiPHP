@@ -4,7 +4,11 @@
 </head>
 
 <body>
-<h1>MochiPHP <span style="font-size: 12pt;">V{$version}</span></h1>
+<h1>
+	MochiPHP 
+	<span style="font-size: 12pt;">V{$version}</span>
+	<span style="font-size: 10pt; font-weight: normal;">on PHP {$phpVersion}</span>
+</h1>
 
 <ul>
 	<li><a href="hello">"Hello world"</a></li>
