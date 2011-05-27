@@ -3,3 +3,16 @@ body {
   background-color: #fff;
   font-family: verdana, arial, 'Bitstream Vera Sans', helvetica, sans-serif;
 }
+
+.post-form {
+	width: 500px;
+}
+
+.post-form .input-field {
+	margin-bottom: 5px;
+}
+
+.post-form input[name="title"], 
+.post-form textarea[name="content"] {
+	width: 100%;
+}
