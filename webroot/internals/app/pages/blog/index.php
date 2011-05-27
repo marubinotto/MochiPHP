@@ -34,6 +34,8 @@ class IndexPage extends Page
 		$instance->save();
 		
 		$this->form->clearSessionState($context);
+		
+		// Redirect After Post pattern
 		$this->setRedirectToSelf($context);
 		return false;
 	}
