@@ -7,6 +7,9 @@ require_once('mochi/controls/Submit.class.php');
 
 class IndexPage extends Page
 {
+	const PAGE_SIZE = 10;
+	public $page = 0;
+	
 	private $form;
 	
 	function onPrepare(Context $context) {
@@ -49,6 +52,10 @@ class IndexPage extends Page
 	function onRender(Context $context) {
 		parent::onRender($context);
 
+		$repository = $this->getFactory()->getBlogPostRepository();
+		$pagination = array('size' => self::PAGE_SIZE, 'index' => $this->page);
+		$posts = $repository->getRecentlyRegistered($pagination);
+		$this->addModel('posts', $posts);
 	}
 }
 

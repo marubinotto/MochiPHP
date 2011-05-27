@@ -18,12 +18,25 @@ body {
 	font-size: 10pt;
 }
 
+#posts {
+	margin-top: 30px;
+}
+
 div.post {
+	width: 600px;
 	font-size: 10pt;
+	margin-bottom: 30px;
 }
 
 div.post div.title {
 	border-bottom: 1px solid gray;
+	font-weight: bold;
+}
+
+span.register-datetime {
+	font-weight: normal; 
+	font-size: 9pt;
+	color: gray;
 }
 
 div.post div.content {
@@ -31,11 +44,16 @@ div.post div.content {
 }
 
 div.post-preview {
-	width: 600px;
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	padding: 5px;
 	border: 2px dotted gray;
 }
 
+div.pagination {
+	width: 600px;
+	text-align: center;
+	font-size: 10pt;
+	margin-bottom: 30px;
+}
 

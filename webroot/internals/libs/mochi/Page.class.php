@@ -99,7 +99,9 @@ abstract class Page extends Object
 		$this->onRender($context);
 		
 		$this->addModel('basePath', $context->getBasePath());
-		$this->addModel('resourcePath', $context->getResourcePath());
+		$pathObject = $context->getResourcePathObject();
+		$this->addModel('resourcePath', $pathObject->getPath());
+		$this->addModel('resourceName', $pathObject->getName());
 			
 		$this->model->setTemplateDir($context->getAppResources()->getTemplateDirPath());
 		$this->model->setTemplateName($this->templateName);

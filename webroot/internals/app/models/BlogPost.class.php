@@ -35,5 +35,9 @@ class BlogPostRepository extends PersistentObjectRepository
 	function getObjectClassName() {
 		return "BlogPost";
 	}
+	
+	function getRecentlyRegistered(array $pagination = NULL) {
+		return $this->findAll("register_datetime desc", $pagination);
+	}
 }
 ?>
