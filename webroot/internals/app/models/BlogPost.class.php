@@ -11,7 +11,7 @@ class BlogPost extends PersistentObject
 		create table %s (
 			id integer unsigned not null auto_increment,
 		
-			title varchar(255) not null,
+			title varchar(255),
 			content text,
 			register_datetime datetime not null,
 			update_datetime datetime not null,
