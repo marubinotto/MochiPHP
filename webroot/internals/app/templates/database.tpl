@@ -1,13 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
-<head>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-<title>Database Admin</title>
-<link type="text/css" rel="stylesheet" href="{$basePath}/assets/mochi/control.css"/>
+{include file='header.tpl'}
+
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/prettify/prettify.css"/>
 <script type="text/javascript" src="{$basePath}/assets/js/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="{$basePath}/assets/mochi/control.js"></script>
 <script type="text/javascript" src="{$basePath}/assets/prettify/prettify.js"></script>
 <style type="text/css">
 {literal}
@@ -45,7 +39,9 @@ table.rows {
 }
 {/literal}
 </style>
+<title>Database Admin</title>
 </head>
+
 <body onload="prettyPrint()">
 
 {* Database Info *}

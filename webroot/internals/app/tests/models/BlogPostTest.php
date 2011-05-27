@@ -17,7 +17,7 @@ class BlogPostTest extends ModelTestBase
 		$this->object->testPersistentFieldMappings();
 	}
 	
-	function test_properties() {
+	function test_persistentProperties() {
 		$this->object->title = 'Hello';
 		$this->assertEquals('Hello', $this->object->title);
 		

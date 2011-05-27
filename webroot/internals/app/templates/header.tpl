@@ -4,4 +4,5 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/mochi/control.css"/>
+<link type="text/css" rel="stylesheet" href="{$basePath}/assets/css/demo.css"/>
 <script type="text/javascript" src="{$basePath}/assets/mochi/control.js"></script>
