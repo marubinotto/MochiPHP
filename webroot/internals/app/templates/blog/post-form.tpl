@@ -14,3 +14,15 @@
 </div>
 {$form->endTag()|smarty:nodefaults}
 </div>
+
+{* preview *}
+{if $form->isSubmitted() && $form->isValid()}
+<div class="post post-preview">
+<div class="title">
+	<span style="color: gray;">[Preview]</span> {$form->fields.title->value}
+</div>
+<div class="content">
+	{$form->fields.content->value|nl2br}
+</div>
+</div>
+{/if}

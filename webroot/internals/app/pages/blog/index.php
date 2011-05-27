@@ -31,7 +31,7 @@ class BlogPostForm extends Form
 		$this->addField(new TextField('title', 
 			array("size" => 60, 'maxLength' => 100, "required" => FALSE)));
 		$this->addField(new TextArea('content', 
-			array("cols" => 50, "rows" => 5, "required" => FALSE)));
+			array("cols" => 50, "rows" => 6, "required" => FALSE)));
 	}
 }
 ?>
