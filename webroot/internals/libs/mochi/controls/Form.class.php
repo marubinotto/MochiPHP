@@ -113,6 +113,12 @@ class Form extends Control
 		
 		return true;
 	}
+	
+	function onPrepare(Context $context) {
+		foreach ($this->fields as $field) {
+			$field->onPrepare($context);
+		}
+	}
 		
 	function setState(Context $context) {
 		$this->setActionUrl($context->getRequestUriWithoutQuery());
@@ -182,9 +188,14 @@ class Form extends Control
 	}
 	
 	function dispatchEvent(Context $context) {
-		if ($this->isSubmitted() && $this->isValid()) {
-			if (!is_null($this->onValidSubmission))
-				return $this->onValidSubmission->invoke($this, $context);
+		if ($this->isSubmitted()) {
+			foreach ($this->fields as $field) {
+				$field->dispatchEvent($context);
+			}
+			if ($this->isValid()) {
+				if (!is_null($this->onValidSubmission))
+					return $this->onValidSubmission->invoke($this, $context);
+			}
 		}
 		return TRUE;
 	}

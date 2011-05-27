@@ -10,13 +10,14 @@
 	{$form->fields.content->render()|smarty:nodefaults}
 </div>
 <div class="buttons">
-	<input type="submit" value=" Preview "/>
+	{$form->fields.preview->render()|smarty:nodefaults}
+	{$form->fields.cancel->render()|smarty:nodefaults}
 </div>
 {$form->endTag()|smarty:nodefaults}
 </div>
 
 {* preview *}
-{if $form->isSubmitted() && $form->isValid()}
+{if $preview}
 <div class="post post-preview">
 <div class="title">
 	<span style="color: gray;">[Preview]</span> {$form->fields.title->value}
