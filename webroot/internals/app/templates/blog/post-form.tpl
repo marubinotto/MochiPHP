@@ -11,6 +11,8 @@
 </div>
 <div class="buttons">
 	{$form->fields.preview->render()|smarty:nodefaults}
+	{$form->fields.post->render()|smarty:nodefaults}
+	&nbsp;&nbsp;&nbsp;
 	{$form->fields.cancel->render()|smarty:nodefaults}
 </div>
 {$form->endTag()|smarty:nodefaults}

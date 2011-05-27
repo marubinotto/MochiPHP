@@ -21,6 +21,23 @@ class IndexPage extends Page
 		return true;
 	}
 	
+	function onPostClick($source, $context) {
+		if (!$this->form->isValid()) return true;
+		
+		// Store a new post to the database
+		$repository = $this->getFactory()->getBlogPostRepository();
+		$instance = $repository->newInstance();		
+		$this->form->copyValuesTo($instance);
+		$now = $instance->formatTimestamp();
+		$instance->registerDatetime = $now;
+		$instance->updateDatetime = $now;
+		$instance->save();
+		
+		$this->form->clearSessionState($context);
+		$this->setRedirectToSelf($context);
+		return false;
+	}
+	
 	function onCancelClick($source, $context) {
 		$this->form->clearSessionState($context);
 		$this->setRedirectToSelf($context);
@@ -46,11 +63,11 @@ class BlogPostForm extends Form
 			array("cols" => 50, "rows" => 6, "required" => false)));
 			
 		$this->addField(new Submit('preview',
-			$page->listenVia('onPreviewClick'), 
-			array("displayName" => "Preview")));
+			$page->listenVia('onPreviewClick'), array("displayName" => "Preview")));
+		$this->addField(new Submit('post',
+			$page->listenVia('onPostClick'), array("displayName" => "Post")));
 		$this->addField(new Submit('cancel',
-			$page->listenVia('onCancelClick'), 
-			array("displayName" => "Cancel")));
+			$page->listenVia('onCancelClick'), array("displayName" => "Cancel")));
 	}
 }
 ?>
