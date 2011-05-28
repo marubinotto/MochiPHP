@@ -233,6 +233,11 @@ The following is a test program of [CRUD operations](http://en.wikipedia.org/wik
 
 https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/tests/models/BlogPostTest.php
 
+What's Next?
+------------
+
+
+
 
 
 

@@ -267,4 +267,17 @@ https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/tests/
 ドキュメントと並行して、サンプルアプリケーションの拡充も行っていきます。
 `/index` にアクセスすると、これらのアプリケーションへのインデックスを見る事ができます。
 
+サンプルアプリケーション Simple Blog (`/blog/index`) は、
+上記で紹介したフレームワークの機能を一通り網羅した実例になっています。
+Form処理やオブジェクトの永続化を利用したCRUDオペレーション、
+Ajaxなどのプログラム例が含まれています。
+
+* Simple Blog
+   * [/internals/app/models/BlogPost.class.php](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/models/BlogPost.class.php)
+   * [/internals/app/pages/blog](https://github.com/marubinotto/MochiPHP/tree/master/webroot/internals/app/pages/blog)
+   * [/internals/app/templates/blog](https://github.com/marubinotto/MochiPHP/tree/master/webroot/internals/app/templates/blog)
+   * [/assets/css/blog.css](https://github.com/marubinotto/MochiPHP/blob/master/webroot/assets/css/blog.css)
+   * [/assets/js/blog.js](https://github.com/marubinotto/MochiPHP/blob/master/webroot/assets/js/blog.js)
+
+
 
