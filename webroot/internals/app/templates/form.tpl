@@ -1,4 +1,4 @@
-{include file='header.tpl'}
+{include file='_header.tpl'}
 
 <style type="text/css">
 {literal}

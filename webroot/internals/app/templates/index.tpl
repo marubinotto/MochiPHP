@@ -1,4 +1,4 @@
-{include file='header.tpl'}
+{include file='_header.tpl'}
 
 <title>MochiPHP</title>
 </head>

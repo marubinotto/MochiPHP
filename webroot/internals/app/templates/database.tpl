@@ -1,4 +1,4 @@
-{include file='header.tpl'}
+{include file='_header.tpl'}
 
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/prettify/prettify.css"/>
 <script type="text/javascript" src="{$basePath}/assets/prettify/prettify.js"></script>

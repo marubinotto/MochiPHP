@@ -1,4 +1,4 @@
-{include file='header.tpl'}
+{include file='_header.tpl'}
 
 <title>Stateful Form Example</title>
 </head>
