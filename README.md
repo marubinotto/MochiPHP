@@ -236,6 +236,20 @@ https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/tests/
 What's Next?
 ------------
 
+More documents will be added soon.
+
+The package contains sample applications which can be accessed via `/index`.
+
+The sample application "Simple Blog" (`/blog/index`) demonstrates all of the features described above, such as Form Handling, CRUD operations with Object Persistence and Ajax.
+
+* Simple Blog
+   * [/internals/app/models/BlogPost.class.php](https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/models/BlogPost.class.php)
+   * [/internals/app/pages/blog](https://github.com/marubinotto/MochiPHP/tree/master/webroot/internals/app/pages/blog)
+   * [/internals/app/templates/blog](https://github.com/marubinotto/MochiPHP/tree/master/webroot/internals/app/templates/blog)
+   * [/assets/css/blog.css](https://github.com/marubinotto/MochiPHP/blob/master/webroot/assets/css/blog.css)
+   * [/assets/js/blog.js](https://github.com/marubinotto/MochiPHP/blob/master/webroot/assets/js/blog.js)
+
+
 
 
 
