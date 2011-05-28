@@ -34,15 +34,11 @@ class Factory
 	}
 	
 	function getPersistentObjectClasses() {
-		return array('BlogPost', 'Task');
+		return array('BlogPost');
 	}
 	
 	function getBlogPostRepository() {
 		return new BlogPostRepository($this->getDatabase());
-	}
-	
-	function getTaskRepository() {
-		return new TaskRepository($this->getDatabase());
 	}
 }
 ?>

@@ -8,18 +8,18 @@ require_once('mochi/utils/Timestamp.class.php');
 class Task extends PersistentObject
 {
 	const TABLE_DEF = "
-create table %s (
-	id integer unsigned not null auto_increment,
-
-	title varchar(255) not null,
-	content text,
-	done boolean not null default 0,
-	register_datetime datetime not null,
-	update_datetime datetime not null,
-	
-	primary key(id)
-) TYPE = InnoDB;
-";
+		create table %s (
+			id integer unsigned not null auto_increment,
+		
+			title varchar(255) not null,
+			content text,
+			done boolean not null default 0,
+			register_datetime datetime not null,
+			update_datetime datetime not null,
+			
+			primary key(id)
+		) TYPE = InnoDB;
+		";
 	
 	protected $p_title;
 	protected $p_content;
