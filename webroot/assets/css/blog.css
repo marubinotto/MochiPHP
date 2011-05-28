@@ -1,0 +1,80 @@
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+div.menu {
+	margin-bottom: 15px;
+	font-size: 10pt;
+}
+
+.post-form {
+	width: 600px;
+	font-size: 10pt;
+}
+
+.post-form .input-field {
+	margin-bottom: 5px;
+}
+
+.post-form input[name="title"], 
+.post-form textarea[name="content"] {
+	width: 100%;
+	font-size: 10pt;
+}
+
+#posts {
+	margin-top: 30px;
+}
+
+div.post {
+	width: 600px;
+	font-size: 10pt;
+	margin-bottom: 30px;
+}
+
+div.post div.title {
+	border-bottom: 1px solid gray;
+	font-weight: bold;
+}
+
+div.post div.title span.title {
+	margin-right: 15px;
+}
+
+div.post div.title span.register-datetime {
+	font-weight: normal; 
+	font-size: 9pt;
+	color: gray;
+}
+
+div.post div.title span.register-datetime a {
+	color: gray;
+}
+
+div.post div.title span.delete-button {
+	margin-left: 15px;
+	font-weight: normal;
+	font-size: 9pt;
+}
+
+div.post div.content {
+	margin-top: 5px;
+}
+
+div.post-preview {
+	margin-top: 20px;
+	margin-bottom: 30px;
+	padding: 5px;
+	border: 2px dotted gray;
+}
+
+div.pagination {
+	width: 600px;
+	text-align: center;
+	font-size: 10pt;
+	margin-bottom: 30px;
+}

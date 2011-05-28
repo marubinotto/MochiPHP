@@ -1,24 +1,22 @@
 {include file='blog/header.tpl'}
 
-<title>Simple Blog</title>
+<title>{$post->title}</title>
 </head>
 
 <body>
 <h1>Simple Blog</h1>
 
-{include file='blog/post-form.tpl'}
+<div class="menu">
+	<a href="index">[Home]</a>
+</div>
 
-{if $posts|smarty:nodefaults}
-<div id="posts">
-{foreach from=$posts->elements|smarty:nodefaults key=index item=post}
 <div class="post">
 	<div class="title">
 		{if $post->title}
 			<span class="title">{$post->title}</span>
 		{/if}
 		<span class="register-datetime">
-			<a href="post?id={$post->id}">
-			{$post->time('registerDatetime', 'Y/m/d H:i:s')}</a>
+			{$post->time('registerDatetime', 'Y/m/d H:i:s')}
 		</span>
 		<span class="delete-button">
 			<a href="#" onclick="deletePost('{$post->id}', this); return false;">delete</a>
@@ -26,10 +24,6 @@
 	</div>
 	<div class="content">{$post->content|nl2br}</div>
 </div>
-{/foreach}
-{include file='blog/pagination.tpl' paginated=$posts|smarty:nodefaults}
-</div>
-{/if}
 
 </body>
 </html>
