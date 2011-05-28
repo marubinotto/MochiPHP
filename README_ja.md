@@ -255,3 +255,16 @@ Formによって送信されたパラメータを`getValue`で取得し、
 
 https://github.com/marubinotto/MochiPHP/blob/master/webroot/internals/app/tests/models/BlogPostTest.php
 
+その他の情報
+-----------
+
+生まれたばかりのプロジェクトなのでドキュメントがまだ貧弱ですが、順次拡充していく予定です。
+
+最新の状況を知るには以下のブログを追いかけてみて下さい。
+
+* http://marubinotto.tumblr.com/tagged/MochiPHP
+
+ドキュメントと並行して、サンプルアプリケーションの拡充も行っていきます。
+`/index` にアクセスすると、これらのアプリケーションへのインデックスを見る事ができます。
+
+
