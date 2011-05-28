@@ -33,10 +33,20 @@ div.post div.title {
 	font-weight: bold;
 }
 
-span.register-datetime {
+div.post div.title span.title {
+	margin-right: 15px;
+}
+
+div.post div.title span.register-datetime {
 	font-weight: normal; 
 	font-size: 9pt;
 	color: gray;
+}
+
+div.post div.title span.delete-button {
+	margin-left: 15px;
+	font-weight: normal;
+	font-size: 9pt;
 }
 
 div.post div.content {
@@ -56,4 +66,5 @@ div.pagination {
 	font-size: 10pt;
 	margin-bottom: 30px;
 }
+
 

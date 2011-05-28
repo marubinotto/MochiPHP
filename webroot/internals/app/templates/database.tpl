@@ -1,7 +1,6 @@
 {include file='header.tpl'}
 
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/prettify/prettify.css"/>
-<script type="text/javascript" src="{$basePath}/assets/js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="{$basePath}/assets/prettify/prettify.js"></script>
 <style type="text/css">
 {literal}

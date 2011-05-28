@@ -6,3 +6,4 @@
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/mochi/control.css"/>
 <link type="text/css" rel="stylesheet" href="{$basePath}/assets/css/demo.css"/>
 <script type="text/javascript" src="{$basePath}/assets/mochi/control.js"></script>
+<script type="text/javascript" src="{$basePath}/assets/js/jquery-1.5.1.min.js"></script>
