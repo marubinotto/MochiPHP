@@ -65,18 +65,21 @@ class StringUtils
 		return $string;
 	}
 	
-	static function encryptPassword($password, $saltLength = 8) {
+	const DEFAULT_HASH_ALGO = 'sha512';
+	
+	static function encryptPassword($password, $algo = self::DEFAULT_HASH_ALGO, $saltLength = 8) {
 		$salt = self::createRandomString($saltLength);
-		return self::encryptPasswordWithSalt($password, $salt);
+		return self::encryptPasswordWithSalt($password, $salt, $algo);
 	}
 	
-	private static function encryptPasswordWithSalt($password, $salt) {
-		return sha1($password . $salt) . $salt;
+	private static function encryptPasswordWithSalt($password, $salt, $algo) {
+		// return sha1($password . $salt) . $salt;
+		return hash($algo, $password . $salt) . $salt;
 	}
 	
-	static function validatePassword($password, $encrypted, $saltLength = 8) {
+	static function validatePassword($password, $encrypted, $algo = self::DEFAULT_HASH_ALGO, $saltLength = 8) {
 		$salt = self::right($encrypted, $saltLength);
-		return self::encryptPasswordWithSalt($password, $salt) === $encrypted;
+		return self::encryptPasswordWithSalt($password, $salt, $algo) === $encrypted;
 	}
 }
 ?>
